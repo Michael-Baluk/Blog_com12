@@ -1,15 +1,58 @@
 {% extends 'base/base.html' %}
 {% block contenido %}
-<div class="container login-container">
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png" class="brand_logo" alt="Logo"> <br>
+                </div>
+            </div>
+            {% include 'includes/form_errors.html' %}
+            <div class="d-flex justify-content-center form_container">
+  
+                <form method = "POST"> {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" name="username" class="form-control input_user" value="" placeholder="Nombre de usuario">
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" class="form-control input_pass" value="" placeholder="password">
+                    </div>
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                 <button  name="button" type="submit" class="btn login_btn">Iniciar sesion</button>
+               </div>
+                </form>
+            </div>
+    
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    ¿Aun no tiene un usuario? &nbsp; <a href="{% url 'register' %}" class="ml-2"> Registrese</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+{% endblock contenido %}
+
+<!--<div class="container login-container">
     <div class="row">
         <div class="col-md-6 login-form-1">
             <h3>Iniciar sesion</h3>
-            <form>
+            {% include 'includes/form_errors.html' %}
+            <form method = "POST"> {% csrf_token %}
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Ingrese su email *" value="" />
+                    <input type="text" class="form-control" placeholder="Ingrese su nombre de usuario *" name= "username" value="" />
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Ingrese su contraseña *" value="" />
+                    <input type="password" class="form-control" placeholder="Ingrese su contraseña *" name= "password" value="" />
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btnSubmit" value="Iniciar sesion" />
@@ -18,13 +61,32 @@
         </div>
         <div class="col-md-6 login-form-2">
             <h3>Registrarse</h3>
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Ingrese su email *" value="" />
+            {% include 'includes/form_errors.html' %}
+            <form method = "POST"> {% csrf_token %}
+               
+                <div class="form-group" >
+                    <strong style= "color: #fff">Nombre de usuario:</strong>
+                    <div class="form-control">
+                   {{form.username}}
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Ingrese su contraseña *" value="" />
-                    <input type="password" class="form-control" placeholder="Repita su contraseña *" value="" />
+                    <strong style= "color: #fff">Email:</strong>
+                    <div class="form-control">
+                        {{form.email}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <strong style= "color: #fff">Contraseña:</strong>
+                    <div class="form-control">
+                        {{form.password1}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <strong style= "color: #fff">Repita su contraseña:</strong>
+                    <div class="form-control">
+                        {{form.password2}}
+                    </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btnSubmit" value="Registrarse" />
@@ -33,6 +95,24 @@
         </div>
     </div>
 </div>
+-->
 
-    
-{% endblock contenido %}
+
+
+
+
+
+
+
+<!--      
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nombre de usuario*" value="" />
+                    <input type="email" class="form-control" placeholder="Ingrese su email *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Ingrese su contraseña *" value="" />
+                    <input type="password" class="form-control" placeholder="Repita su contraseña *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Registrarse" />
+                </div>-->
