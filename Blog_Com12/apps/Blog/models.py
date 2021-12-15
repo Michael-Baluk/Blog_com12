@@ -24,7 +24,7 @@ class BlogPost(models.Model):
         ('borrador', 'Borrador'),
         ('publicado', 'Publicado')
     )
-    category = models.ForeignKey(BlogCategoria, on_delete=models.PROTECT,default=1)
+    categoria = models.ForeignKey(BlogCategoria, on_delete=models.PROTECT,default=1)
     titulo = models.CharField(max_length=250)
     excerpt = models.TextField(null=True)
     contenido = models.TextField()
@@ -32,6 +32,7 @@ class BlogPost(models.Model):
     publicado = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name='blog_posts')
     status = models.CharField(max_length=10,choices=options,default='borrador')
+    imagen = models.ImageField(default= "empty.jpg" ,null=True, blank = True)
     objects = models.Manager()
     postobjects = BlogPostObjects()
 

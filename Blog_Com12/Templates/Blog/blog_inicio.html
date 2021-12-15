@@ -7,7 +7,11 @@
             <div class="col-md-4">
                 <div class="card-content">
                     <div class="card-img">
-                        <img src="https://placeimg.com/380/230/nature" alt="">
+                        {% if post.imagen %}
+                        <img src="{{post.imagen.url}}"/>
+                        {% else %}
+                        <img src="https://archive.org/download/placeholder-image/placeholder-image.jpg" />
+                        {% endif %}
                         <span><h4>{{post.autor}}</h4></span>
                     </div>
                     <div class="card-desc">
