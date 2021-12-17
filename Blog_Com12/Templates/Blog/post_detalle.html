@@ -21,6 +21,7 @@
 
         <nav class="blog-pagination">
           <a class="btn btn-outline-primary" href="{% url 'blog:blog_inicio' %}">Volver Atras</a>
+          <a class="btn btn-outline-primary" href="{% url 'blog:blog_editar' post.slug %}">Editar</a>
         </nav>
 
       </div><!-- /.blog-main -->
@@ -34,4 +35,25 @@
 
     </div><!-- /.row -->
   </main><!-- /.container -->
+    <hr> <!-- the comment box -->
+    <div class="card-body bg-light" id="comment-box">
+      <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
+      <form role="form">
+          <div class="form-group">
+              <textarea class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-reply"></i> Submit</button>
+      </form>
+    </div>
+    <script src="https://apis.google.com/js/plusone.js">
+    </script>
+    <hr>
+    <div class="card-body bg-light" id="comment-box">
+        <!-- the comments -->
+        {% for comentario in comentarios %}
+        <h3><i class="fa fa-comment"></i> {{comentario.nombre}} dice:
+            <small> {{comentario.publicado}}</small>
+        </h3>
+        {% endfor %}
+    </div>
 {% endblock contenido %}

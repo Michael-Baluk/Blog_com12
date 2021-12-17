@@ -1,6 +1,7 @@
 from django.db import models
 from apps.Usuarios.models import Usuario 
 from django.utils import timezone
+from django.utils.text import slugify
 # Create your models here.
 
 
@@ -43,12 +44,16 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.titulo
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.titulo)
+        super().save(*args, **kwargs)
+
 class BlogComentario(models.Model):
 
     post = models.ForeignKey(BlogPost,on_delete=models.CASCADE, related_name='comentarios')
-    nombre = models.CharField(max_length=50)
-    email = models.EmailField()
-    contenido = models.TextField()
+    nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    email = models.EmailField(max_length=100)
+    contenido = models.TextField(max_length=500)
     publicado = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
     class Meta:

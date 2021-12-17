@@ -89,4 +89,14 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btnSubmit" value="Registrarse" />
-                </div>-->
+                </div>
+            
+            def nuevopost(request):
+    form = CrearPostForm()
+    if request.method == 'POST':
+        form = CrearPostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inicio')
+    context= {'form': form}
+    return render(request, "Blog/blog_nuevo.html", context)-->

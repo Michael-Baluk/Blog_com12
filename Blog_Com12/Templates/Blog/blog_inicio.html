@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% block contenido %}
 <section class="details-card">
+    <a href="{% url 'blog:blog_nuevo' %}" class="btn-card" style="">Nuevo post</a>  
     {% for post in posts %}
     <div class="container">
         <div class="row">
@@ -17,7 +18,8 @@
                     <div class="card-desc">
                         <h3>{{post.titulo}}</h3>
                         <p>{{post.excerpt|truncatechars:50}}</p>
-                            <a href="{% url 'blog:post_detalle' slug=post.slug %}" class="btn-card">Leer</a>   
+                            <a href="{% url 'blog:post_detalle' slug=post.slug %}" class="btn-card">Leer</a>
+                            <a class="btn btn-outline-primary" href="{% url 'blog:blog_editar' post.slug %}">Editar</a>   
                     </div>
                 </div>
             </div>
