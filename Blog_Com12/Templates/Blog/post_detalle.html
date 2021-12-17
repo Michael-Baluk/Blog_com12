@@ -37,6 +37,9 @@
   </main><!-- /.container -->
     <hr> <!-- the comment box -->
     <div class="card-body bg-light" id="comment-box">
+      <form method = "POST"> {% csrf_token %}
+      {{form.as_p}}
+      </form>
       <h4><i class="fa fa-paper-plane-o"></i> Leave a Comment:</h4>
       <form role="form">
           <div class="form-group">

@@ -50,7 +50,7 @@ class BlogPost(models.Model):
 
 class BlogComentario(models.Model):
 
-    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE, related_name='comentarios')
+    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
     nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     email = models.EmailField(max_length=100)
     contenido = models.TextField(max_length=500)

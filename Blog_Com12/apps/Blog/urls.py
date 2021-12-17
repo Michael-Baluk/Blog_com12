@@ -11,4 +11,5 @@ urlpatterns = [
     path("Nuevo",views.PostNuevo.as_view(),name = "blog_nuevo"),
     path('editar/<str:slug>/', views.PostEditar.as_view(),name="blog_editar"),
     path('<str:slug>/', views.PostDetalle.as_view(),name="post_detalle"),
+    path('comment/<str:slug>/', views.ComentarioNuevo.as_view(),name="comentario_nuevo"),
 ] 
