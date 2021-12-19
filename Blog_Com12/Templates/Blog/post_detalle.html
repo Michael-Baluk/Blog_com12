@@ -7,9 +7,9 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
           {{post.categoria}}
         </h3>
-        <div class="blog-post">
+        <div class="blog-post" id="Letra-post">
           <h2 class="blog-post-title">{{post.titulo}}</h2>
-          <p class="blog-post-meta">{{post.publicado}} Autor:&nbsp;<a href="#">{{post.autor}}</a></p>
+          <p class="blog-post-meta">{{post.publicado}}</p>
 
           <p>{{post.excerpt}}.</p>
           <hr>
@@ -23,7 +23,7 @@
           {% if user.is_authenticated %}
             {% if user.id == post.autor.id or user.is_superuser%}
           <a class="btn-card"  href="{% url 'blog:blog_editar' post.pk %}">Editar</a>
-          <a class="btn-card"  href="{% url 'blog:blog_eliminar' post.pk %}">Borrar</a>
+          <a class="btn btn-danger"  href="{% url 'blog:blog_eliminar' post.pk %}">Borrar</a>
             {% endif %}
           {% endif %}
         </nav>
@@ -35,10 +35,8 @@
           <div class="card p-4" id="card-perfil">
               <div class=" image d-flex flex-column justify-content-center align-items-center">
                  <button class="btn btn-light"> <img src="{{post.autor.imagen.url}}" height="100" width="100" /></button>
-                <span class="name mt-3">{{post.autor}}</span> <span class="idd">@eleanorpena</span>
-                  <div class=" d-flex mt-2"> <a href="{% url 'usuario:usuario_perfil' post.autor.pk %}" class="btn-card">Ir al perfil</a> </div>
-                  <div class="text mt-3"> <span> {{post.autor.resumen}}</span> </div>
-                  <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
+                <span class="name mt-3">{{post.autor}}</span> 
+                  <div class="text mt-3" style="width:90%"> <span> {{post.autor.resumen}}</span> </div>
                   <div class=" px-2 rounded mt-4 date "> <span class="join">Miembro desde {{post.autor.date_joined|date:"M d, Y" }}</span> </div>
               </div>
           </div>
@@ -48,30 +46,30 @@
     </div><!-- /.row -->
   </main><!-- /.container -->
     <hr> <!-- the comment box -->
-    <div class="card-body bg-light" id="comment-box">
-      <form method = "POST"> {% csrf_token %}
+    <form method = "POST"> {% csrf_token %}
       {{form.as_p}}
-      </form>
-      <h4><i class="fa fa-paper-plane-o"></i> <a class="btn-card"  href="{% url 'blog:comentario_nuevo' post.pk %}">Deja un comentario</a></h4>
-      <form role="form">
 
-          <div class="form-group">
-              <textarea class="form-control" rows="3"></textarea>
-          </div>
-          <button type="submit" class="btn-card" ><i class="fa fa-reply"></i> Submit</button>
-      </form>
+    <div  id="comment-box">
+  
     </div>
     <script src="https://apis.google.com/js/plusone.js">
     </script>
     <hr>
+  </form>
+  <h4 style="margin-left:15%"><i class="fa fa-paper-plane-o"></i> <a class="btn-card" style="padding:10px;margin-bottom:10px;"  href="{% url 'blog:comentario_nuevo' post.pk %}">Deja un comentario</a></h4>
+<form role="form">
     <div class="card-body bg-light" id="comment-box">
-        <!-- the comments -->
-        {% for comentario in object.comentarios.all %}
+      {% for comentario in object.comentarios.all %}
         <p>
           <h3><i class="fa fa-comment"></i> {{comentario.nombre}} dice: </h3>
           <small>{{comentario.publicado}}</small>
         </p>
-        {{comentario.contenido}}
-        {% endfor %}
+        {{comentario.contenido}} <br>
+        {% if user.is_authenticated %}
+            {% if user.is_superuser%}
+        <a style="float:right;" class="btn btn-danger"  href="{% url 'blog:comentario_eliminar' comentario.pk %}">Borrar</a> <br>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
     </div>
 {% endblock contenido %}

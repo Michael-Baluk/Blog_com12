@@ -1,12 +1,15 @@
 {% extends 'base/base.html' %}
 {% block contenido %}
-
+<div class="row" style= "width:62%;margin-left:auto;margin-right:auto;">
+    <a href="{% url 'blog:blog_nuevo' %}" class="btn-card" id="Post-nuevo" style="text-align:center;">Nuevo post</a> 
+</div>
 <section class="details-card">
+
     <div class="container">
+
         <div class="row">
-            <a href="{% url 'blog:blog_nuevo' %}" class="btn-card" style="text-align:center;">Nuevo post</a>  
         {% for post in posts %}
-            <div class="col-md-4">
+            <div class="col-md-4" id="Tabla-posts">
                 <div class="card-content">
                     <div class="card-img">
                         {% if post.imagen %}
@@ -21,7 +24,6 @@
                         <p>{{post.excerpt|truncatechars:50}}</p>
                             <a href="{% url 'blog:post_detalle' post.pk %}" class="btn-card">Leer</a>  
                     </div>
-                
                 </div>
             </div>
             {% endfor %}
@@ -30,4 +32,7 @@
     </div>
 
 </section>
+<div class="row" style= "width:62%;margin-left:auto;margin-right:auto;">
+    <a href="{% url 'blog:blog_nuevo' %}" class="btn-card" id="Post-nuevo" style="text-align:center;">Nuevo post</a> 
+</div>
 {% endblock contenido %}

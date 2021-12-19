@@ -8,7 +8,7 @@ from .forms import EditarUsuarioForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls                 import reverse_lazy
 
-class UserPage(DetailView):
+class UserPage(TemplateView):
     template_name = "Usuarios/usuario_info.html"
     model = Usuario
     context_object_name = 'usuario'

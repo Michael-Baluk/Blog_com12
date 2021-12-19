@@ -1,10 +1,57 @@
 {% extends 'Base/base.html' %}
 {% block contenido %}
-{% include 'includes/form_errors.html' %}
-<form method = "POST"> {% csrf_token %}
-{{form.as_p}}
-<button  name="button" type="submit" class="btn login_btn">Crear Post</button>
-</form>
+<div class="container h-100" >
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_register_card" style="width:70%;">
+            {% include 'includes/form_errors.html' %}
+            <form method = "POST"> {% csrf_token %}
+                <div class="input-group mb-3">
 
+                    <div class="form-group"style="margin-left:10px;" >
+                        <strong style= "color: #fff">Categoria</strong>
+                        <div class="form-control" style= "width:%;">
+                            {{form.categoria}}
+                        </div>
+                    </div>
+                </div>
+            <div class="input-group mb-3">
+                <div class="form-group"style="margin-left:10px;" >
+                    <strong style= "color: #fff">Titulo</strong>
+                    <div class="form-control"style= "width:200%;" >
+                        {{form.titulo}}
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="form-group" style="margin-left:10px;" >
+                    <strong style= "color: #fff">Excerpt(resumen) maximo 200 caracteres</strong>
+                    <div class="form-control"style= "width:200%;" >
+                        {{form.excerpt}}
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="form-group" style="margin-left:10px;" >
+                    <strong style= "color: #fff">Contenido</strong>
+                    <div class="form-control" style= "width:200%;">
+                        {{form.contenido}}
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="form-group" style="margin-left:10px;" >
+                    <strong style= "color: #fff">Imagen</strong>
+                    <div class="form-control">
+                        {{form.imagen}}
+                    </div>
+                </div>
+            </div>
+            <button  name="button" type="submit" class="btn login_btn">Crear Post</button>
+        </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock contenido %}
