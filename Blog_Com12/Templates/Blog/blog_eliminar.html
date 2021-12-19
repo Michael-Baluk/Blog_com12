@@ -1,0 +1,13 @@
+{% extends 'base/base.html' %}
+{% block contenido %}
+{% include 'includes/form_errors.html' %}
+<form method="post">{% csrf_token %}
+    <div class="alert alert-danger" role="alert">
+        ¿Seguro desea eliminar "{{object.titulo}}, escrito por : {{object.autor}}"?
+    </div>
+    {{ form }}
+    <button type="submit" class="btn btn-primary">confirmar</button>
+    <a href= "{% url "blog:post_detalle" object.pk %}" type="button" class="btn btn-danger" >Cancelar </a>
+</form>
+
+{% endblock contenido %}

@@ -8,8 +8,9 @@ from . import views
 app_name = "blog"
 urlpatterns = [
     path("", views.BlogInicio.as_view(),name= "blog_inicio"),
-    path("Nuevo",views.PostNuevo.as_view(),name = "blog_nuevo"),
-    path('editar/<str:slug>/', views.PostEditar.as_view(),name="blog_editar"),
-    path('<str:slug>/', views.PostDetalle.as_view(),name="post_detalle"),
-    path('comment/<str:slug>/', views.ComentarioNuevo.as_view(),name="comentario_nuevo"),
+    path("Nuevo/",views.PostNuevo.as_view(),name = "blog_nuevo"),
+    path('editar/<int:pk>/', views.PostEditar.as_view(),name="blog_editar"),
+    path('<int:pk>/', views.PostDetalle.as_view(),name="post_detalle"),
+    path('eliminar/<int:pk>/',views.PostEliminar.as_view(), name= "blog_eliminar"),
+    path('comentario/<int:pk>/', views.ComentarioNuevo.as_view(),name="comentario_nuevo"),
 ] 
