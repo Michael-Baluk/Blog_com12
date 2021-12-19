@@ -31,7 +31,7 @@ class BlogPost(models.Model):
     contenido = models.TextField()
     slug = models.SlugField(max_length=250, unique_for_date='publicado',null=False, unique=True)
     publicado = models.DateTimeField(default=timezone.now)
-    autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name='blog_posts')
+    autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="autor")
     status = models.CharField(max_length=10,choices=options,default='borrador')
     imagen = models.ImageField(default= "empty.jpg" ,null=True, blank = True)
     objects = models.Manager()
@@ -48,9 +48,11 @@ class BlogPost(models.Model):
         self.slug = slugify(self.titulo)
         super().save(*args, **kwargs)
 
+
+    
 class BlogComentario(models.Model):
 
-    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE)
+    post = models.ForeignKey(BlogPost,on_delete=models.CASCADE,related_name="comentarios")
     nombre = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     email = models.EmailField(max_length=100)
     contenido = models.TextField(max_length=500)
@@ -62,4 +64,3 @@ class BlogComentario(models.Model):
     
     def __str__(self):
         return f"comentado por {self.nombre}"
-    

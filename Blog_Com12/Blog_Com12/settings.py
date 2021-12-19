@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = reverse_lazy('inicio')
+LOGIN_REDIRECT_URL = 'inicio'
 AUTH_USER_MODEL = "Usuarios.Usuario"
 
 

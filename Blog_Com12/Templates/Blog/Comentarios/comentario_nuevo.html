@@ -1,10 +1,8 @@
 {% extends 'Base/base.html' %}
 {% block contenido %}
-{% include 'includes/form_errors.html' %}
 <form method = "POST"> {% csrf_token %}
 {{form.as_p}}
-<button  name="button" type="submit" class="btn login_btn">Crear Post</button>
+
+<button type="submit" class="btn btn-primary" >Enviar comentario</button>
 </form>
-
-
 {% endblock contenido %}
