@@ -9,6 +9,7 @@ from .forms                      import CrearPostForm, CrearComentarioForm
 from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
+from django.db.models            import Count
 from .filters                    import PostFilter
 # Create your views here.
 class BlogInicio(ListView):
@@ -20,6 +21,32 @@ class BlogInicio(ListView):
     def get_queryset(self):
         return BlogPost.postobjects.all()
 
+class FiltrarFechaHoy(ListView):
+    template_name = "Blog/blog_inicio.html"
+    model = BlogPost
+    context_object_name = "posts"
+    paginate_by = 9
+
+    def get_queryset(self):
+        return BlogPost.postobjects.filter(publicado__range=["2021-12-19", "2021-12-20"])
+
+class FiltrarCategoria(ListView):
+    template_name = "Blog/blog_inicio.html"
+    model = BlogPost
+    context_object_name = "posts"
+    paginate_by = 9
+
+    def get_queryset(self):
+        return BlogPost.postobjects.filter(categoria_id=self.kwargs.get('pk'))    
+
+class FiltrarComentarios(ListView):
+    template_name = "Blog/blog_inicio.html"
+    model = BlogPost
+    context_object_name = "posts"
+    paginate_by = 9
+
+    def get_queryset(self):
+        return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('-comment_count')
 
     #def contador_comentarios(self):
       #  posts_by_score = BlogComentario.objects.filter(publicado=True).values('object_pk').annotate(
@@ -28,8 +55,6 @@ class BlogInicio(ListView):
       #  top_posts = Post.objects.in_bulk(post_ids)
       #  return top_posts
 
-
-    
 class PostDetalle(DetailView):
     model = BlogPost
     template_name = 'blog/post_detalle.html'

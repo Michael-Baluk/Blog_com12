@@ -27,7 +27,7 @@ class BlogPost(models.Model):
     )
     categoria = models.ForeignKey(BlogCategoria, on_delete=models.PROTECT,default=1)
     titulo = models.CharField(max_length=250)
-    excerpt = models.TextField(null=True,max_length=200)
+    excerpt = models.TextField(null=True,max_length=200) #excerpt = Resumen del contenido
     contenido = models.TextField()
     slug = models.SlugField(max_length=250, unique_for_date='publicado',null=False, unique=True)
     publicado = models.DateTimeField(default=timezone.now)

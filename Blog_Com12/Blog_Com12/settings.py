@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': "proyecto_final",
         'USER': 'postgres',
-        'PASSWORD': 'a',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '5432'
     }
@@ -145,3 +145,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
