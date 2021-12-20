@@ -10,13 +10,14 @@ from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
 from django.db.models            import Count
+from .filters                    import PostFilter
 # Create your views here.
 class BlogInicio(ListView):
     template_name = "Blog/blog_inicio.html"
     model = BlogPost
     context_object_name = "posts"
-    paginate_by = 9
-
+    paginate_by = 6
+  
     def get_queryset(self):
         return BlogPost.postobjects.all()
 
@@ -46,6 +47,13 @@ class FiltrarComentarios(ListView):
 
     def get_queryset(self):
         return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('-comment_count')
+
+    #def contador_comentarios(self):
+      #  posts_by_score = BlogComentario.objects.filter(publicado=True).values('object_pk').annotate(
+      #  score=Count('id')).order_by('-score')
+      #  post_ids = [int(obj['object_pk']) for obj in posts_by_score]
+      #  top_posts = Post.objects.in_bulk(post_ids)
+      #  return top_posts
 
 class PostDetalle(DetailView):
     model = BlogPost
@@ -115,9 +123,18 @@ class ComentarioNuevo(LoginRequiredMixin,CreateView):
             f.email = self.request.user
             return super(ComentarioNuevo, self).form_valid(form)
 
-class PostComentario(ListView):
+class MostrarComentario(ListView):
     model = BlogComentario
     template_name = "blog/post_detalle.html"
     context_object_name = "comentarios"
     def get_queryset(self):
         return BlogComentario.objects.all()
+
+class ComentarioEliminar(GroupRequiredMixin,DeleteView):
+    template_name = 'Blog/Comentarios/comentario_eliminar.html'
+    model = BlogComentario
+    group_required = [u"admin"]
+    
+    def get_success_url(self, **kwargs):
+        return reverse('blog:blog_inicio')
+

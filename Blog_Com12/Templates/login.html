@@ -4,8 +4,8 @@
     <div class="d-flex justify-content-center h-100">
         <div class="user_card">
             <div class="d-flex justify-content-center">
-                <div class="brand_logo_container">
-                    <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png" class="brand_logo" alt="Logo"> <br>
+                <div class="Login-Text">
+                    Bienvenido
                 </div>
             </div>
             {% include 'includes/form_errors.html' %}
@@ -41,78 +41,3 @@
 
     
 {% endblock contenido %}
-
-<!--<div class="container login-container">
-    <div class="row">
-        <div class="col-md-6 login-form-1">
-            <h3>Iniciar sesion</h3>
-            {% include 'includes/form_errors.html' %}
-            <form method = "POST"> {% csrf_token %}
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Ingrese su nombre de usuario *" name= "username" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Ingrese su contraseña *" name= "password" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Iniciar sesion" />
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6 login-form-2">
-            <h3>Registrarse</h3>
-            {% include 'includes/form_errors.html' %}
-            <form method = "POST"> {% csrf_token %}
-               
-                <div class="form-group" >
-                    <strong style= "color: #fff">Nombre de usuario:</strong>
-                    <div class="form-control">
-                   {{form.username}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <strong style= "color: #fff">Email:</strong>
-                    <div class="form-control">
-                        {{form.email}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <strong style= "color: #fff">Contraseña:</strong>
-                    <div class="form-control">
-                        {{form.password1}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <strong style= "color: #fff">Repita su contraseña:</strong>
-                    <div class="form-control">
-                        {{form.password2}}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Registrarse" />
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
--->
-
-
-
-
-
-
-
-
-<!--      
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Nombre de usuario*" value="" />
-                    <input type="email" class="form-control" placeholder="Ingrese su email *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Ingrese su contraseña *" value="" />
-                    <input type="password" class="form-control" placeholder="Repita su contraseña *" value="" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Registrarse" />
-                </div>-->
