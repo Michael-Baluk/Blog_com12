@@ -1,10 +1,10 @@
 from django.shortcuts            import render,redirect,reverse
 from django.urls                 import reverse_lazy
 from django.views.generic        import TemplateView
-from django.views.generic        import ListView, CreateView, UpdateView
+from django.views.generic        import ListView, CreateView, UpdateView, TemplateView
 from django.views.generic.edit   import UpdateView, DeleteView, FormView
-from django.views.generic.detail import DetailView
-from .models                     import BlogPost, BlogComentario
+from django.views.generic.detail import DetailView, SingleObjectMixin
+from .models                     import BlogPost, BlogComentario, BlogCategoria
 from .forms                      import CrearPostForm, CrearComentarioForm
 from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator       import Paginator
@@ -17,8 +17,16 @@ class BlogInicio(ListView):
     model = BlogPost
     context_object_name = "posts"
     paginate_by = 6
-  
-    def get_queryset(self):
+    extra_context = {
+        'categorias': BlogCategoria.objects.all()
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = BlogCategoria.objects.all()
+        return context
+    def get_queryset(self, **kwargs):
+        print ('hola', kwargs)
         return BlogPost.postobjects.all()
 
 class FiltrarFechaHoy(ListView):
