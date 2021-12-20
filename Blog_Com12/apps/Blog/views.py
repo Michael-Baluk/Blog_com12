@@ -69,6 +69,13 @@ class PostDetalle(DetailView):
     context_object_name = 'post'
     def get_queryset(self):
         return BlogPost.objects.all()
+
+    def get_context_data(self, **kwargs):
+	    context = super(ListarAdmin, self).get_context_data(**kwargs)
+	    context["filter"] = PostFilter(self.request.GET, queryset=Product.objects.all())
+	    return context
+
+
     
     
 class PostNuevo(GroupRequiredMixin,CreateView):
