@@ -7,13 +7,15 @@
 
     <div class="container">
         <form class="form-inline my-2 my-lg-0" style="padding:50px;" method="GET">
-            <div class="row">
-                <div class="col-md-10">
-                      <input class="form-control mr-sm-2 " name="name_categoria" type="search" placeholder="Ingrese nombre del producto..." aria-label="Search" value="{{filter}}">
-                  </div>
-                  <div class="col-md-2">
-                      <button class="btn btn-sm btn-outline-secondary" type="submit">Buscar</button>
-                  </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
               </div>
         </form>
         <div class="row">
