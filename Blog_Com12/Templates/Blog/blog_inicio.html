@@ -19,6 +19,29 @@
               </div>
         </form>
         <div class="row">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Fecha
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/blog/filtrar/fecha">Hoy</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categorias
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for post in posts %}
+                <a class="dropdown-item" href="/blog/filtrar/fecha">asdasdasd</a>
+                {% endfor %}
+                {% for picho in categorias %}
+                <a class="dropdown-item" href="/blog/filtrar/fecha">asdasdasfffffd</a>
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+        <div class="row">
         {% for post in posts %}
             <div class="col-md-4" id="Tabla-posts">
                 <div class="card-content">
