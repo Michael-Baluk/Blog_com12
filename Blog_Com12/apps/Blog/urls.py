@@ -10,7 +10,6 @@ app_name = "blog"
 urlpatterns = [
     path("", views.BlogInicio.as_view(),name= "blog_inicio"),
     path("filtrar/fecha", views.FiltrarFechaHoy.as_view(),name= "blog_fecha"),
-    path('filtrar/categoria/<int:pk>', views.FiltrarCategoria.as_view(), name='post-category'),
     path('filtrar/comentarios', views.FiltrarComentarios.as_view(), name='post-category'),
     path("Nuevo/",views.PostNuevo.as_view(),name = "blog_nuevo"),
     path('editar/<int:pk>/', views.PostEditar.as_view(),name="blog_editar"),

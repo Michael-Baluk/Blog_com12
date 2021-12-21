@@ -5,42 +5,12 @@
 </div>
 <section class="details-card">
 
-    <div class="container">
-        <form class="form-inline my-2 my-lg-0" style="padding:50px;" method="GET">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </div>
-        </form>
-        <div class="row">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Fecha
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/blog/filtrar/fecha">Hoy</a>
-              </div>
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categorias
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for post in posts %}
-                <a class="dropdown-item" href="/blog/filtrar/fecha">asdasdasd</a>
-                {% endfor %}
-                {% for picho in categorias %}
-                <a class="dropdown-item" href="/blog/filtrar/fecha">asdasdasfffffd</a>
-                {% endfor %}
-              </div>
-            </div>
-        </div>
+   <!-- <div class="container">
+      <form method="GET">
+        {{form_filtro.as_p}}
+        <button  name="button" type="submit" class="btn login_btn">Iniciar sesion</button>
+      </form>
+    -->
         <div class="row">
         {% for post in posts %}
             <div class="col-md-4" id="Tabla-posts">
