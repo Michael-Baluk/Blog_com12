@@ -5,7 +5,7 @@ from django.views.generic        import ListView, CreateView, UpdateView
 from django.views.generic.edit   import UpdateView, DeleteView, FormView
 from django.views.generic.detail import DetailView
 from .models                     import BlogPost, BlogComentario, BlogCategoria
-from .forms                      import CrearPostForm, CrearComentarioForm
+from .forms                      import CrearPostForm, CrearComentarioForm, PostFilterForm
 from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
@@ -17,45 +17,34 @@ class BlogInicio(ListView):
     context_object_name = "posts"
     paginate_by = 6
   
-
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categorias'] = BlogCategoria.objects.all()
-        context['mostrarfecha'] = True
-        context['mostrarcomentario'] = True
+        context = super(BlogInicio, self).get_context_data(**kwargs)
+        busqueda_titulo = self.request.GET.get("titulo", None)
+        busqueda_categoria = self.request.GET.get("categoria", None)
+        busqueda_autor = self.request.GET.get("autor", None)
+
+        initial_data = {}
+        if busqueda_titulo is not None and busqueda_titulo!="":
+            initial_data["titulo"] = busqueda_titulo
+
+        if busqueda_categoria is not None and busqueda_categoria!="":
+            initial_data["categoria"] = busqueda_categoria
+
+        context["form_filtro"] = PostFilterForm(initial=initial_data)
         return context
-    def get_queryset(self, **kwargs):
-        return BlogPost.postobjects.all()
-
-class FiltrarFechaHoy(ListView):
-    template_name = "Blog/blog_inicio.html"
-    model = BlogPost
-    context_object_name = "posts"
-    paginate_by = 6
 
     def get_queryset(self):
-        return BlogPost.postobjects.filter(publicado__range=["2021-12-19", "2021-12-20"])
+        busqueda_titulo = self.request.GET.get("titulo", None)
+        busqueda_categoria = self.request.GET.get("categoria", None)
+        query = BlogPost.objects.all().order_by("-publicado")
+        
+        if busqueda_titulo is not None and busqueda_titulo!="":
+            query = query.filter(titulo__icontains=busqueda_titulo)
+        if busqueda_categoria is not None and busqueda_categoria!="":
+            query = query.filter(categoria=busqueda_categoria)
 
-class FiltrarCategoria(ListView):
-    template_name = "Blog/blog_inicio.html"
-    model = BlogPost
-    context_object_name = "posts"
-    paginate_by = 6
+        return query
 
-    def get_queryset(self):
-        return BlogPost.postobjects.filter(categoria_id=self.kwargs.get('pk'))    
-
-class FiltrarComentarios(ListView):
-    template_name = "Blog/blog_inicio.html"
-    model = BlogPost
-    context_object_name = "posts"
-    paginate_by = 6
-
-    def get_queryset(self):
-        if self.kwargs.get('orden')== 2:
-            return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('-comment_count')
-        if self.kwargs.get('orden')== 1:
-            return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('comment_count')
 
 
 class PostDetalle(DetailView):

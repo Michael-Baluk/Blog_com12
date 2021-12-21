@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
-from .models import BlogPost, BlogComentario
+from .models import BlogPost, BlogComentario, BlogCategoria
+from django.db.models            import Count
 
 
 class CrearPostForm(ModelForm):
@@ -17,3 +18,10 @@ class CrearComentarioForm(ModelForm):
     class Meta:
         model = BlogComentario
         fields = ['contenido',]
+
+class PostFilterForm(forms.Form):
+    #comentarios = forms.ModelChoiceField(BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0), required=False)
+    titulo = forms.CharField(required=False)
+    categoria = forms.ModelChoiceField(required=False, queryset=BlogCategoria.objects.all())
+    def __init__(self, *args, **kwargs):
+        super(PostFilterForm, self).__init__(*args, **kwargs)

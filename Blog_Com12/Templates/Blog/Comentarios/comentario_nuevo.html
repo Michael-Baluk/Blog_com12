@@ -1,8 +1,18 @@
 {% extends 'Base/base.html' %}
 {% block contenido %}
-<form method = "POST"> {% csrf_token %}
-{{form.as_p}}
+<div class="container h-100" >
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_register_card" style="width:70%;">
+            {% include 'includes/form_errors.html' %}
+            <form method = "POST" > {% csrf_token %}
+                {{form.as_p}}
+                <button  name="button" type="submit" class="btn login_btn">Enviar Comentario</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-<button type="submit" class="btn btn-primary" >Enviar comentario</button>
-</form>
 {% endblock contenido %}
+
+
+

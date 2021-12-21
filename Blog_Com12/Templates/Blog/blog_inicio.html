@@ -6,42 +6,12 @@
 <section class="details-card">
 
     <div class="container">
+
         <div class="row">
-            {% if mostrarfecha %}
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Fecha
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/blog/filtrar/fecha">Hoy</a>
-              </div>
-            </div>
-            {% endif %}
-            {% if categorias %}
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categorias
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for categoria in categorias %}
-                <a class="dropdown-item" href="/blog/filtrar/categoria/{{categoria.id}}">{{categoria.name}}</a>
-                {% endfor %}
-              </div>
-            </div>
-            {% endif %}
-            {% if mostrarcomentario %}
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Comentarios Recibidos
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/blog/filtrar/comentarios/2">Más comentados</a>
-                <a class="dropdown-item" href="/blog/filtrar/comentarios/1">Menos comentados</a>
-              </div>
-            {% endif %}
-            </div>
-        </div>
-        <div class="row">
+          <form class="form-inline my-2 my-lg-0" style="padding:;" method="GET">
+            <p>{{form_filtro.as_p}}
+            <button class="btn btn-sm btn-outline-secondary" type="submit">Buscar</button></p>
+          </form>
         {% for post in posts %}
             <div class="col-md-4" >
                 <div class="card-content">
@@ -52,6 +22,7 @@
                         <img src="https://archive.org/download/placeholder-image/placeholder-image.jpg" />
                         {% endif %}
                         <span><h4>{{post.autor}}</h4></span>
+                        <span style= "margin-top:43%;"><h4>{{post.categoria}}</h4></span>
                     </div>
                     <div class="card-desc">
                         <h3>{{post.titulo}}</h3>
