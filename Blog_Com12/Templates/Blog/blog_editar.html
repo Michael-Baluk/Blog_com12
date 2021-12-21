@@ -2,7 +2,7 @@
 
 {% block contenido %}
     {% include 'includes/form_errors.html' %}  
-    <form method = "POST"> {% csrf_token %}
+    <form method = "POST" enctype='multipart/form-data'>> {% csrf_token %}
         {{form.as_p}}
     
         <button type="submit" class="btn btn-primary" >Confirmar cambios</button>

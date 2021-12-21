@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center h-100">
         <div class="user_register_card" style="width:70%;">
             {% include 'includes/form_errors.html' %}
-            <form method = "POST"> {% csrf_token %}
+            <form method = "POST" enctype='multipart/form-data'>> {% csrf_token %}
                 {{form.as_p}}
                 <button  name="button" type="submit" class="btn login_btn">Editar perfil</button>
             </form>

@@ -1,9 +1,9 @@
 from django.shortcuts            import render,redirect,reverse
 from django.urls                 import reverse_lazy
 from django.views.generic        import TemplateView
-from django.views.generic        import ListView, CreateView, UpdateView, TemplateView
+from django.views.generic        import ListView, CreateView, UpdateView
 from django.views.generic.edit   import UpdateView, DeleteView, FormView
-from django.views.generic.detail import DetailView, SingleObjectMixin
+from django.views.generic.detail import DetailView
 from .models                     import BlogPost, BlogComentario, BlogCategoria
 from .forms                      import CrearPostForm, CrearComentarioForm
 from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
@@ -16,21 +16,8 @@ class BlogInicio(ListView):
     model = BlogPost
     context_object_name = "posts"
     paginate_by = 6
+  
 
-   # def get_context_data(self, **kwargs):
-       # context = super(BlogInicio, self).get_context_data(**kwargs)
-       # context['form_filtro'] = PostFilterForm()
-      #  return context
-
-   # def get_queryset(self,):
-    #    busqueda_categoria = self.request.GET.get('categoria',None)
-    #    busqueda_comentario = self.request.GET.get("comentario",None)
-   #     query= BlogPost.objects.all().order_by("titulo")
-   #     if busqueda_categoria is not None and busqueda_categoria != "":
-   #         query = query.filter(categoria=busqueda_categoria)
-   #     if busqueda_comentario is not None and busqueda_comentario != "":
-   #         query = query.filter(comentario=busqueda_comentario)
-   #     return query
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categorias'] = BlogCategoria.objects.all()
@@ -44,38 +31,32 @@ class FiltrarFechaHoy(ListView):
     template_name = "Blog/blog_inicio.html"
     model = BlogPost
     context_object_name = "posts"
-    paginate_by = 9
+    paginate_by = 6
 
     def get_queryset(self):
-        return BlogPost.postobjects.filter(fecha__range=["2021-12-19", "2021-12-20"])
- 
+        return BlogPost.postobjects.filter(publicado__range=["2021-12-19", "2021-12-20"])
+
+class FiltrarCategoria(ListView):
+    template_name = "Blog/blog_inicio.html"
+    model = BlogPost
+    context_object_name = "posts"
+    paginate_by = 6
+
+    def get_queryset(self):
+        return BlogPost.postobjects.filter(categoria_id=self.kwargs.get('pk'))    
 
 class FiltrarComentarios(ListView):
     template_name = "Blog/blog_inicio.html"
     model = BlogPost
     context_object_name = "posts"
-    paginate_by = 9
+    paginate_by = 6
 
     def get_queryset(self):
         if self.kwargs.get('orden')== 2:
             return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('-comment_count')
         if self.kwargs.get('orden')== 1:
             return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('comment_count')
-    #def contador_comentarios(self):
-      #  posts_by_score = BlogComentario.objects.filter(publicado=True).values('object_pk').annotate(
-      #  score=Count('id')).order_by('-score')
-      #  post_ids = [int(obj['object_pk']) for obj in posts_by_score]
-      #  top_posts = Post.objects.in_bulk(post_ids)
-      #  return top_posts
 
-class FiltrarCategoria(ListView):
-    template_name = "Blog/blog_inicio.html"
-    model = BlogPost
-    context_object_name = "posts"
-    paginate_by = 9
-
-    def get_queryset(self):
-        return BlogPost.postobjects.filter(categoria_id=self.kwargs.get('pk'))
 
 class PostDetalle(DetailView):
     model = BlogPost
@@ -83,18 +64,8 @@ class PostDetalle(DetailView):
     context_object_name = 'post'
     def get_queryset(self):
         return BlogPost.objects.all()
-
-    '''def get_context_data(self, **kwargs):
-	    context = super(PostDetalle, self).get_context_data(**kwargs)
-	    return context
-    '''
-    # no se q hará esto pero rompe todo --> 
-    '''def get_context_data(self, **kwargs):
-	    context = super(ListarAdmin, self).get_context_data(**kwargs)
-	    context["filter"] = PostFilter(self.request.GET, queryset=Product.objects.all())
-	    return context 
-    '''
-
+    
+    
 class PostNuevo(GroupRequiredMixin,CreateView):
         group_required = [u'admin', u'Escritor']
         template_name = 'Blog/blog_nuevo.html'

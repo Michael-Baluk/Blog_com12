@@ -27,18 +27,18 @@ class BlogPost(models.Model):
     )
     categoria = models.ForeignKey(BlogCategoria, on_delete=models.PROTECT,default=1)
     titulo = models.CharField(max_length=250)
-    excerpt = models.TextField(null=True,max_length=200) #excerpt = Resumen del contenido
+    excerpt = models.TextField(null=True,max_length=200)
     contenido = models.TextField()
     slug = models.SlugField(max_length=250, unique_for_date='publicado',null=False, unique=True)
-    fecha = models.DateTimeField(default=timezone.now)
+    publicado = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="autor")
-    status = models.CharField(max_length=10,choices=options,default='publicado')
+    status = models.CharField(max_length=10,choices=options,default='borrador')
     imagen = models.ImageField(default= "empty.jpg" ,null=True, blank = True)
     objects = models.Manager()
     postobjects = BlogPostObjects()
 
     class Meta:
-        ordering = ('-fecha',)
+        ordering = ('-publicado',)
         db_table= "blog_post"
     
     def __str__(self):
