@@ -5,7 +5,7 @@ from django.views.generic        import ListView, CreateView, UpdateView, Templa
 from django.views.generic.edit   import UpdateView, DeleteView, FormView
 from django.views.generic.detail import DetailView, SingleObjectMixin
 from .models                     import BlogPost, BlogComentario, BlogCategoria
-from .forms                      import CrearPostForm, CrearComentarioForm, PostFilterForm
+from .forms                      import CrearPostForm, CrearComentarioForm
 from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
@@ -68,29 +68,33 @@ class FiltrarComentarios(ListView):
       #  top_posts = Post.objects.in_bulk(post_ids)
       #  return top_posts
 
+class FiltrarCategoria(ListView):
+    template_name = "Blog/blog_inicio.html"
+    model = BlogPost
+    context_object_name = "posts"
+    paginate_by = 9
+
+    def get_queryset(self):
+        return BlogPost.postobjects.filter(categoria_id=self.kwargs.get('pk'))
+
 class PostDetalle(DetailView):
     model = BlogPost
     template_name = 'blog/post_detalle.html'
     context_object_name = 'post'
     def get_queryset(self):
         return BlogPost.objects.all()
-<<<<<<< HEAD
 
-    def get_context_data(self, **kwargs):
+    '''def get_context_data(self, **kwargs):
 	    context = super(PostDetalle, self).get_context_data(**kwargs)
 	    return context
-
-=======
+    '''
     # no se q hará esto pero rompe todo --> 
     '''def get_context_data(self, **kwargs):
 	    context = super(ListarAdmin, self).get_context_data(**kwargs)
 	    context["filter"] = PostFilter(self.request.GET, queryset=Product.objects.all())
 	    return context 
     '''
->>>>>>> 7f6aa5a8f558713503e7107fd7300b9aace7ccf5
 
-    
-    
 class PostNuevo(GroupRequiredMixin,CreateView):
         group_required = [u'admin', u'Escritor']
         template_name = 'Blog/blog_nuevo.html'

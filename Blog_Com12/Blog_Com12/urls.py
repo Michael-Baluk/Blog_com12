@@ -25,8 +25,7 @@ urlpatterns = [
     path("register/",views.register, name = 'register'),
     path('login/', views_auth.LoginView.as_view(template_name="login.html"), name = 'login'),
     path('logout/', views_auth.logout_then_login, name = 'logout'),
-    path("", views.Inicio.as_view(), name= "inicio"),
-    path('blog/', include('apps.Blog.urls', namespace='blog')),
+    path('', include('apps.Blog.urls', namespace='blog')),
     path('usuario/', include('apps.Usuarios.urls', namespace='usuario')),
     path("register_success/",views.register_success,name="register_success"),
 ]

@@ -7,9 +7,7 @@
         <header>
             <div id= "header-list">
                 <ul>
-                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
                     <li><a href="{% url 'blog:blog_inicio' %}">Blog</a></li>
-                    <li><a href="">Contacto</a></li>
                     <li><a href="{% url 'usuario:usuario_perfil' %}" >{{user.get_username}}</a></li>
                     {%if user.is_authenticated and user.is_superuser %}  
                         <li style="margin-left:60%;">
