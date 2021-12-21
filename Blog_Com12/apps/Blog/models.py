@@ -32,7 +32,7 @@ class BlogPost(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publicado',null=False, unique=True)
     fecha = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="autor")
-    status = models.CharField(max_length=10,choices=options,default='borrador')
+    status = models.CharField(max_length=10,choices=options,default='publicado')
     imagen = models.ImageField(default= "empty.jpg" ,null=True, blank = True)
     objects = models.Manager()
     postobjects = BlogPostObjects()
