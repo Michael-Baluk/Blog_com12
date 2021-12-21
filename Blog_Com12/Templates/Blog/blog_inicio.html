@@ -5,12 +5,42 @@
 </div>
 <section class="details-card">
 
-   <!-- <div class="container">
-      <form method="GET">
-        {{form_filtro.as_p}}
-        <button  name="button" type="submit" class="btn login_btn">Iniciar sesion</button>
-      </form>
-    -->
+    <div class="container">
+        <div class="row">
+            {% if mostrarfecha %}
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Fecha
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/blog/filtrar/fecha">Hoy</a>
+              </div>
+            </div>
+            {% endif %}
+            {% if categorias %}
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categorias
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for categoria in categorias %}
+                <a class="dropdown-item" href="/blog/filtrar/categoria/{{categoria.id}}">{{categoria.name}}</a>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+            {% if mostrarcomentario %}
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Comentarios Recibidos
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/blog/filtrar/comentarios/2">Más comentados</a>
+                <a class="dropdown-item" href="/blog/filtrar/comentarios/1">Menos comentados</a>
+              </div>
+            {% endif %}
+            </div>
+        </div>
         <div class="row">
         {% for post in posts %}
             <div class="col-md-4" id="Tabla-posts">

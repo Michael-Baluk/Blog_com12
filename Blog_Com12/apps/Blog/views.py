@@ -31,6 +31,14 @@ class BlogInicio(ListView):
    #     if busqueda_comentario is not None and busqueda_comentario != "":
    #         query = query.filter(comentario=busqueda_comentario)
    #     return query
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = BlogCategoria.objects.all()
+        context['mostrarfecha'] = True
+        context['mostrarcomentario'] = True
+        return context
+    def get_queryset(self, **kwargs):
+        return BlogPost.postobjects.all()
 
 class FiltrarFechaHoy(ListView):
     template_name = "Blog/blog_inicio.html"
@@ -49,8 +57,10 @@ class FiltrarComentarios(ListView):
     paginate_by = 9
 
     def get_queryset(self):
-        return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('-comment_count')
-
+        if self.kwargs.get('orden')== 2:
+            return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('-comment_count')
+        if self.kwargs.get('orden')== 1:
+            return BlogPost.postobjects.annotate(comment_count=Count('comentarios')).filter(comment_count__gt=0).order_by('comment_count')
     #def contador_comentarios(self):
       #  posts_by_score = BlogComentario.objects.filter(publicado=True).values('object_pk').annotate(
       #  score=Count('id')).order_by('-score')
@@ -64,11 +74,20 @@ class PostDetalle(DetailView):
     context_object_name = 'post'
     def get_queryset(self):
         return BlogPost.objects.all()
+<<<<<<< HEAD
 
     def get_context_data(self, **kwargs):
 	    context = super(PostDetalle, self).get_context_data(**kwargs)
 	    return context
 
+=======
+    # no se q hará esto pero rompe todo --> 
+    '''def get_context_data(self, **kwargs):
+	    context = super(ListarAdmin, self).get_context_data(**kwargs)
+	    context["filter"] = PostFilter(self.request.GET, queryset=Product.objects.all())
+	    return context 
+    '''
+>>>>>>> 7f6aa5a8f558713503e7107fd7300b9aace7ccf5
 
     
     
