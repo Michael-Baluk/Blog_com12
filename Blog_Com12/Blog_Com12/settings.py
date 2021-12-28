@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-#=wm-!ja5yjut)4xcc&^=7j6%*al09s9ng_hzpgy9+-_*t8%p(
 DEBUG = True
 
 ALLOWED_HOSTS = []
-LOGIN_URL = reverse_lazy('login')
+LOGIN_URL = reverse_lazy('usuario:login')
 LOGIN_REDIRECT_URL = 'inicio'
 AUTH_USER_MODEL = "Usuarios.Usuario"
 
@@ -138,6 +138,9 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
 
 

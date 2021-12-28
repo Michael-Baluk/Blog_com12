@@ -17,9 +17,9 @@
                         </li>
                     {% endif %}
                     {% if user.is_authenticated %}
-                        <a href= "{% url 'logout' %}" class= "btn-card" style= "float: right"> Cerrar sesion</a><br>
+                        <a href= "{% url 'usuario:logout' %}" class= "btn-card" style= "float: right"> Cerrar sesion</a><br>
                     {%else%}
-                        <a href= "{% url 'login' %}" class= "btn-card" style= "float: right"> Iniciar sesion</a>
+                        <a href= "{% url 'usuario:login' %}" class= "btn-card" style= "float: right"> Iniciar sesion</a>
                     {%endif%}
 
                 </ul>

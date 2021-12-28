@@ -20,8 +20,13 @@ class EditarUsuarioForm(UserChangeForm):
         fields = ['first_name','last_name','resumen','imagen']
         exclude = ['username', 'email']
         resumen=forms.CharField(max_length=250)
+
     def __init__(self, *args, **kwargs):
         super(EditarUsuarioForm, self).__init__(*args, **kwargs)
         for field in self: 
-             field.field.widget.attrs['class'] = 'form-control'
+            field.field.widget.attrs['class'] = 'form-control'
+             
+            #self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})    
+            #self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
+             
     

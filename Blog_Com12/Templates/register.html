@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% block contenido %}
-<div class="container h-100" style="padding:140px">
+<div class="container h-100" id="Container-body">
     <div class="d-flex justify-content-center h-100">
         <div class="user_register_card">
             <div class="d-flex justify-content-center">
@@ -18,7 +18,7 @@
                         </div>
                         <div class="form-group" >
                             <strong style= "color: #fff">Nombre de usuario:</strong>
-                            <div class="form-control">
+                            <div class="form-control input-user" >
                                 {{form.username}}
                             </div>
                         </div>
@@ -61,17 +61,12 @@
                </div>
                 </form>
             </div>
-    
             <div class="mt-4">
-                <div class="d-flex justify-content-center links">
-                    ¿Ya tiene un usuario? &nbsp; <a href="{% url 'login' %}" class="ml-2"> Inicie Sesion</a>
-                </div>
-               
+                <p class="text-style"> ¿Ya tiene un usuario?  <a href="{% url 'usuario:login' %}" class="text-style"> Inicie Sesion</a></p>
+                <p class="text-style">¿No recuerda su contraseña? <a href="{% url 'reset_password' %}" class="text-style"> Recuperar</a></p>
             </div>
-
         </div>
     </div>
-
 </div>
 
 

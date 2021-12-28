@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% block contenido %}
-<div class="container h-100" style="padding:140px">
+<div class="container h-100" id="Container-body" style="padding:140px">
     <div class="d-flex justify-content-center h-100">
         <div class="user_card">
             <div class="d-flex justify-content-center">
@@ -31,9 +31,8 @@
             </div>
     
             <div class="mt-4">
-                <div class="d-flex justify-content-center links">
-                    ¿Aun no tiene un usuario? &nbsp; <a href="{% url 'register' %}" class="ml-2"> Registrese</a>
-                </div>
+                    <p class="text-style">¿Aun no tiene un usuario? <a href="{% url 'usuario:register' %}" class="text-style"> Registrese</a></p>
+                    <p class="text-style">¿No recuerda su contraseña? <a href="{% url 'reset_password' %}" class="text-style"> Recuperar</a></p>
             </div>
         </div>
     </div>
