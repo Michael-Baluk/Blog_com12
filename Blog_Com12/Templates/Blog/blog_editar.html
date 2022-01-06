@@ -2,11 +2,59 @@
 
 {% block contenido %}
     {% include 'includes/form_errors.html' %}  
-    <form method = "POST" enctype='multipart/form-data'>> {% csrf_token %}
-        {{form.as_p}}
+    <div class="container h-100" >
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_register_card" style="width:70%;">
+                {% include 'includes/form_errors.html' %}
+                <form method = "POST"enctype='multipart/form-data'>> {% csrf_token %}
+                    <div class="input-group mb-3">
     
+                        <div class="form-group"style="margin-left:10px;" >
+                            <strong style= "color: #fff">Categoria</strong>
+                            <div class="form-control" style= "width:%;">
+                                {{form.categoria}}
+                            </div>
+                        </div>
+                    </div>
+                <div class="input-group mb-3">
+                    <div class="form-group"style="margin-left:10px;" >
+                        <strong style= "color: #fff">Titulo</strong>
+                        <div class="form-control"style= "width:200%;" >
+                            {{form.titulo}}
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-group" style="margin-left:10px;" >
+                        <strong style= "color: #fff">Excerpt(resumen) maximo 200 caracteres</strong>
+                        <div class="form-control"style= "width:200%;" >
+                            {{form.excerpt}}
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-group" style="margin-left:10px;" >
+                        <strong style= "color: #fff">Contenido</strong>
+                        <div class="form-control">
+                            {{form.media}}
+                            {{form.contenido}}
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="form-group" style="margin-left:10px;" >
+                        <strong style= "color: #fff">Imagen</strong> <br/>
+                            {{form.imagen}}
+                    </div>
+                </div>
         <button type="submit" class="btn btn-primary" >Confirmar cambios</button>
         <a href= "{% url "blog:post_detalle" object.pk %}" type="button" class="btn btn-danger" >Cancelar </a>
+            </div>
+    
+                </form>
+            </div>
+        </div>
+    </div>
 
     </form>
 {% endblock contenido %}

@@ -2,6 +2,7 @@ from django.db import models
 from apps.Usuarios.models import Usuario 
 from django.utils import timezone
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 
@@ -28,7 +29,7 @@ class BlogPost(models.Model):
     categoria = models.ForeignKey(BlogCategoria, on_delete=models.PROTECT,default=1)
     titulo = models.CharField(max_length=250)
     excerpt = models.TextField(null=True,max_length=200)
-    contenido = models.TextField()
+    contenido = RichTextField()
     slug = models.SlugField(max_length=250, unique_for_date='publicado',null=False, unique=True)
     publicado = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="autor")

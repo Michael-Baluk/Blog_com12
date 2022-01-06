@@ -1,56 +1,28 @@
 {% extends 'base/base.html' %}
+ 
     {% block contenido %}
-    <main role="main" class="container" id="Container-body">
-        <div class="row">
-          <div class="col-md-8 blog-main" style="margin-left:auto;margin-right:auto;">
-            <h3 class="pb-3 mb-4 font-italic border-bottom">
-              La importancia de los ODS
-            </h3>
-            <div class="blog-post" id="Letra-post">
-              <h2 class="blog-post-title">¿POR QUÉ LA INTEGRACIÓN DE LOS ODS?</h2>
-              <p class="blog-post-meta">21/12/2021</p>
     
-              <p>Desde la crisis climática y la pandemia de COVID-19 hasta el aumento de las
-                desigualdades y los conflictos prolongados, estos desafíos no se pueden abordar
-                de forma aislada. La forma en que los países responden y las soluciones que
-                desarrollan deben integrarse.
-                La Agenda 2030 para el Desarrollo Sostenible refleja esta realidad a través de sus
-                diecisiete Objetivos de Desarrollo Sostenible (ODS) indivisibles, que abarcan las
-                dimensiones social, económica y ambiental del desarrollo. Los ODS deben
-                implementarse de manera integrada para ayudar a los países a abordar desafíos
-                complejos y diseñar un futuro más sostenible.</p>
-              <hr>
-              <h2 class="blog-post-title">¿QUÉ ES LA INTEGRACIÓN DE LOS ODS?</h2>
-                <div>
-                    Con poco menos de una década hasta 2030, el mundo necesita nuevas
-                    soluciones y nuevas formas de pensar, trabajar, asociarse y financiarse, para
-                    superar las antiguas fronteras del desarrollo.
-                    Es por eso que el PNUD se está enfocando en la integración de los ODS, un
-                    enfoque de desarrollo que apunta a sistemas, no solo a sectores temáticos, para
-                    abordar todos los aspectos de un desafío complejo, incluidas sus causas
-                    fundamentales y sus efectos en cadena en las economías, sociedades y
-                    ecosistemas naturales.
-                    La cartera de integración del PNUD se centra en apoyar a las partes interesadas
-                    con enfoques, métodos, capacidades y espacios para pasar de saber que los
-                    desafíos de desarrollo complejos requieren enfoques integrados para &#39;hacer&#39; la
-                    integración y liderar el cambio de sistemas a diario.
-                </div><br>
-                <h2 class="blog-post-title">QUIENES LO HACEN POSIBLE:</h2>
-                <div>
-                    La Promesa Climática es posible gracias al generoso apoyo de Suecia, Alemania,
-                    la Unión Europea, Italia, España, Bélgica, Islandia y otros donantes principales, y
-                    respalda la contribución del PNUD a la Asociación NDC.
-                    El PNUD garantiza que su apoyo a la Promesa Climática sea complementario y
-                    aproveche los mandatos, las ventajas comparativas y los conjuntos de habilidades
-                    de una amplia gama de socios estratégicos. Esto incluye socios de la ONU, como
-                    la CMNUCC, PNUMA, FAO, OIT, UNICEF, ONU-HABITAT, OMS; Bancos
-                    multilaterales, incluidos el Banco Mundial, AfDB, ADB, IsDB; otras organizaciones
-                    intergubernamentales e internacionales, como IRENA, GIZ, GGGI, WWF y
-                    WRI; así como grupos de la sociedad civil.
-                </div>
-            </div><!-- /.blog-post -->
-          </div><!-- /.blog-main -->
-    
-        </div><!-- /.row -->
-      </main><!-- /.container -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100"  src="https://blog.naturlider.com/wp-content/uploads/2020/03/AdobeStock_309195144-post-dia-mundial-naturaleza.jpeg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="https://images.memphistours.com/xlarge/0aedf956ea5dc185849200ac590465d1.jpg" alt="Second slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only"><strong>Anterior</strong></span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Siguiente</span>
+      </a>
+    </div>
     {% endblock contenido %}

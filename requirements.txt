@@ -10,3 +10,4 @@ sqlparse==0.4.2
 Pillow==8.4.0
 django-braces 1.15.0
 django-filter==21.1
+django-ckeditor==6.2.0
