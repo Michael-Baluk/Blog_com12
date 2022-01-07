@@ -10,6 +10,7 @@ from django.contrib.auth.mixins  import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
 from django.db.models            import Count
+from bootstrap_modal_forms.generic import BSModalCreateView
 # Create your views here.
 class BlogInicio(ListView):
     template_name = "Blog/blog_inicio.html"
@@ -100,7 +101,7 @@ class PostEliminar(GroupRequiredMixin,UserPassesTestMixin,DeleteView):
         return obj.autor == self.request.user or self.request.user.is_superuser
 
 
-class ComentarioNuevo(LoginRequiredMixin,CreateView):
+class ComentarioNuevo(LoginRequiredMixin,BSModalCreateView):
         template_name = 'Blog/comentarios/comentario_nuevo.html'
         model = BlogComentario
         form_class = CrearComentarioForm
@@ -129,4 +130,5 @@ class ComentarioEliminar(GroupRequiredMixin,DeleteView):
     
     def get_success_url(self, **kwargs):
         return reverse('blog:blog_inicio')
+        
 

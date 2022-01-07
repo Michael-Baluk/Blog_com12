@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "apps.Blog",
     "django_filters",
      "ckeditor",
+     'bootstrap_modal_forms'
 ]
 
 MIDDLEWARE = [

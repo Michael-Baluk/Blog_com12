@@ -19,10 +19,10 @@
         </div><!-- /.blog-post -->
 
         <nav class="blog-pagination">
-          <a class="btn-card"  href="{% url 'blog:blog_inicio' %}">Volver Atras</a>
+          <a class="btn-card" style="padding:10px;margin-bottom:10px;"  href="{% url 'blog:blog_inicio' %}">Volver Atras</a>
           {% if user.is_authenticated %}
             {% if user.id == post.autor.id or user.is_superuser%}
-          <a class="btn-card"  href="{% url 'blog:blog_editar' post.pk %}">Editar</a>
+          <a class="btn-card" style="padding:10px;margin-bottom:10px;" href="{% url 'blog:blog_editar' post.pk %}">Editar</a>
           <a class="btn btn-danger"  href="{% url 'blog:blog_eliminar' post.pk %}">Borrar</a>
             {% endif %}
           {% endif %}
@@ -56,20 +56,52 @@
     </script>
     <hr>
   </form>
-  <h4 style="margin-left:15%"><i class="fa fa-paper-plane-o"></i> <a class="btn-card" style="padding:10px;margin-bottom:10px;"  href="{% url 'blog:comentario_nuevo' post.pk %}">Deja un comentario</a></h4>
+  <h4 style="margin-left:18%"><i class="fa fa-paper-plane-o"></i>
+  <button id="comentario-nuevo" class="btn-card" type="button" style="padding:10px;margin-bottom:10px;" name="button">Deja un comentario</button></h4>
+
 <form role="form">
-    <div class="card-body bg-light" id="comment-box">
+  
       {% for comentario in object.comentarios.all %}
         <p>
+          <div class="card-body bg-light" id="comment-box">
           <h3><i class="fa fa-comment"></i> {{comentario.nombre}} dice: </h3>
           <small>{{comentario.publicado}}</small>
         </p>
         {{comentario.contenido}} <br>
         {% if user.is_authenticated %}
-            {% if user.is_superuser%}
+            {% if user.id == comentario.nombre.id or user.is_superuser%}
         <a style="float:right;" class="btn btn-danger"  href="{% url 'blog:comentario_eliminar' comentario.pk %}">Borrar</a> <br>
           {% endif %}
         {% endif %}
+      </div>
       {% endfor %}
-    </div>
+ 
+
 {% endblock contenido %}
+{% block extrajs %}
+    
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+  
+</div> 
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $("#comentario-nuevo").modalForm({
+        formURL: "{% url 'blog:comentario_nuevo' post.pk %}"
+    });
+
+});
+</script>
+{% endblock extrajs %}
+
+<!--<!--$(document).ready(function() {
+
+  $("#comentario-eliminar").modalForm({
+      formURL: "{% url 'blog:comentario_eliminar' comentario.pk %}"
+  });
+
+}); -->-->

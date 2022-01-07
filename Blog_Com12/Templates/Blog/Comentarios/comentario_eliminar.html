@@ -3,7 +3,7 @@
 {% include 'includes/form_errors.html' %}
 <form method="post">{% csrf_token %}
     <div class="alert alert-danger" role="alert">
-        ¿Seguro desea eliminar el siguiente comentario: {{object.contenido}}, escrito por : {{object.nombre}}"?
+        ¿Seguro desea eliminar el siguiente comentario: {{object.contenido}}?
     </div>
     {{ form }}
     <button type="submit" class="btn btn-primary">confirmar</button>
