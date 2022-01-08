@@ -57,7 +57,12 @@
     <hr>
   </form>
   <h4 style="margin-left:18%"><i class="fa fa-paper-plane-o"></i>
-  <button id="comentario-nuevo" class="btn-card" type="button" style="padding:10px;margin-bottom:10px;" name="button">Deja un comentario</button></h4>
+    {% if user.is_authenticated %}
+      <button id="comentario-nuevo" class="btn-card" type="button" style="padding:10px;margin-bottom:10px;" name="button">Deja un comentario</button></h4>
+    {% else %}
+    <button class="btn-disable" type="button" style="padding:5px;margin-bottom:10px;" name="button" href= "{% url 'usuario:login' %}">Inicie sesion para comentar</button></h4>
+    {% endif %}
+
 
 <form role="form">
   
@@ -70,7 +75,7 @@
         {{comentario.contenido}} <br>
         {% if user.is_authenticated %}
             {% if user.id == comentario.nombre.id or user.is_superuser%}
-        <a style="float:right;" class="btn btn-danger"  href="{% url 'blog:comentario_eliminar' comentario.pk %}">Borrar</a> <br>
+              <a style="float:right;" class="btn btn-danger"  href="{% url 'blog:comentario_eliminar' comentario.pk %}">Borrar</a> <br>
           {% endif %}
         {% endif %}
       </div>
@@ -104,4 +109,4 @@ $(document).ready(function() {
       formURL: "{% url 'blog:comentario_eliminar' comentario.pk %}"
   });
 
-}); -->-->
+}); -->

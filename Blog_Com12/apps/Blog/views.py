@@ -11,6 +11,7 @@ from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
 from django.db.models            import Count
 from bootstrap_modal_forms.generic import BSModalCreateView
+from django.contrib import messages
 # Create your views here.
 class BlogInicio(ListView):
     template_name = "Blog/blog_inicio.html"
@@ -105,7 +106,7 @@ class ComentarioNuevo(LoginRequiredMixin,BSModalCreateView):
         template_name = 'Blog/comentarios/comentario_nuevo.html'
         model = BlogComentario
         form_class = CrearComentarioForm
-        
+        raise_exception = True
         def get_success_url(self, **kwargs):
             return reverse('blog:post_detalle', kwargs={'pk': self.kwargs['pk']})
 
@@ -116,6 +117,7 @@ class ComentarioNuevo(LoginRequiredMixin,BSModalCreateView):
             f.email = self.request.user
             return super(ComentarioNuevo, self).form_valid(form)
 
+
 class MostrarComentario(ListView):
     model = BlogComentario
     template_name = "blog/post_detalle.html"
@@ -123,7 +125,7 @@ class MostrarComentario(ListView):
     def get_queryset(self):
         return BlogComentario.objects.all()
 
-class ComentarioEliminar(GroupRequiredMixin,DeleteView):
+class ComentarioEliminar(GroupRequiredMixin,LoginRequiredMixin,DeleteView):
     template_name = 'Blog/Comentarios/comentario_eliminar.html'
     model = BlogComentario
     group_required = [u"admin"]
