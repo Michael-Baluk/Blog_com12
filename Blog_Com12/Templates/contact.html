@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+
+{% block contenido %}
+
+<div class="container h-100"  id="Container-body">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_register_card" style="width:100%">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li style= "color: #fff"> <strong>{{ message }}</strong> </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% include 'includes/form_errors.html' %}
+            <form method = "POST"enctype='multipart/form-data'> {% csrf_token %}
+                    <div class="input-group mb-3" style="display:inline-block">
+                        <div class="form-group"style="margin-left:10px;" >
+                            <strong style= "color: #fff">Subject</strong>
+                            <div class="form-control" >
+                                {{form.subject}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3" style="display:inline-block">
+                        <div class="form-group" style="margin-left:10px;" >
+                            <strong style= "color: #fff">Email</strong>
+                            <div class="form-control">
+                                {{form.email}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3" style="display:inline-block">
+                        <div class="form-group" style="margin-left:10px;" >
+                            <strong style= "color: #fff">Mensaje</strong>
+                            <div class="form-control">
+                                {{form.message}}
+                            </div>
+                        </div>
+                    </div>
+                    <button  name="button" type="submit" class="btn login_btn">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}

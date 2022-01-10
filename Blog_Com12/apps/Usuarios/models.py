@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 class Usuario(AbstractUser):
     email = models.EmailField(max_length=100)
@@ -7,3 +8,14 @@ class Usuario(AbstractUser):
     resumen = models.TextField(max_length=250,null=True)
     class Meta:
         db_table = 'usuarios'
+
+class Contacto(models.Model):
+    email = models.EmailField(max_length=100)
+    subject= models.CharField(max_length=250)
+    message = models.TextField()
+    fecha = models.DateTimeField(default=timezone.now)
+    class Meta:
+        db_table = "Contacto"
+    
+    def __str__(self):
+        return self.subject

@@ -1,6 +1,12 @@
 from django.contrib import admin
-from .models import Usuario
+from . import models
+from .models import Usuario, Contacto
 
 admin.site.register(Usuario)
 
-# Register your models here.
+@admin.register(models.Contacto)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('subject','email',"fecha")
+    search_fields = ("subject", "email","fecha")
+    list_filter = ("fecha",)
+    readonly_fields= ('subject','email','message',"fecha")

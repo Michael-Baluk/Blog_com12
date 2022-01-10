@@ -1,4 +1,4 @@
-from django.shortcuts            import render,redirect,reverse
+from django.shortcuts            import render, redirect, reverse, get_object_or_404
 from django.urls                 import reverse_lazy
 from django.views.generic        import TemplateView
 from django.views.generic        import ListView, CreateView, UpdateView
@@ -11,7 +11,8 @@ from django.core.paginator       import Paginator
 from braces.views                import GroupRequiredMixin
 from django.db.models            import Count
 from bootstrap_modal_forms.generic import BSModalCreateView
-from django.contrib import messages
+from django.contrib                import messages
+from django.http                 import HttpResponseRedirect
 # Create your views here.
 class BlogInicio(ListView):
     template_name = "Blog/blog_inicio.html"
@@ -55,6 +56,16 @@ class PostDetalle(DetailView):
     context_object_name = 'post'
     def get_queryset(self):
         return BlogPost.objects.all()
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        likes_connected = get_object_or_404(BlogPost, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        data['post_is_liked'] = liked
+        return data
     
     
 class PostNuevo(GroupRequiredMixin,CreateView):
@@ -132,5 +143,14 @@ class ComentarioEliminar(GroupRequiredMixin,LoginRequiredMixin,DeleteView):
     
     def get_success_url(self, **kwargs):
         return reverse('blog:blog_inicio')
-        
+
+def LikeView(request,pk):
+    post = get_object_or_404(BlogPost,id = request.POST.get('post_id'))
+
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+       
+    else:
+        post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('blog:post_detalle', args=[str(pk)]))
 

@@ -35,12 +35,16 @@ class BlogPost(models.Model):
     autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="autor")
     status = models.CharField(max_length=10,choices=options,default='borrador')
     imagen = models.ImageField(default= "empty.jpg" ,null=True, blank = True)
+    likes = models.ManyToManyField(Usuario, related_name="blog_post")
     objects = models.Manager()
     postobjects = BlogPostObjects()
 
     class Meta:
         ordering = ('-publicado',)
         db_table= "blog_post"
+    
+    def like_count(self):
+        return self.likes.count()
     
     def __str__(self):
         return self.titulo

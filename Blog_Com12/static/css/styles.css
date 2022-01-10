@@ -48,6 +48,7 @@
         #Container-body{
         padding: 0px;
         }
+        
     }
 
     .card-content {
@@ -464,4 +465,5 @@
     .modal-header {
         background:-webkit-linear-gradient(left,#65CAB6, #FFFFFF);;
     }
+
 </style>

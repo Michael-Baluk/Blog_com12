@@ -1,12 +1,13 @@
-from django.shortcuts import render,redirect
-from django.views import generic
-from django.views.generic import TemplateView
-from .models        import Usuario
-from django.views.generic.detail import DetailView
-from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
-from .forms import EditarUsuarioForm, CrearUsuarioForm
-from django.contrib.auth.views import PasswordChangeView
-from django.urls                 import reverse_lazy
+from django.shortcuts                import render,redirect
+from django.views                    import generic
+from django.views.generic            import TemplateView
+from .models                         import Usuario
+from django.views.generic.detail     import DetailView
+from django.contrib.auth.forms       import PasswordChangeForm, UserCreationForm
+from .forms                          import EditarUsuarioForm, CrearUsuarioForm, ContactForm
+from django.contrib.auth.views       import PasswordChangeView
+from django.urls                     import reverse_lazy
+from django.contrib                  import messages
 
 class UserPage(TemplateView):
     template_name = "Usuarios/usuario_info.html"
@@ -48,3 +49,14 @@ def register(request):
 
 def register_success(request):
     return render(request,'Usuarios/register_success.html',{})
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'El mensaje se envio correctamente')
+            return redirect("usuario:contacto")
+    form = ContactForm()
+    context = {'form': form}
+    return render(request, 'contact.html', context)

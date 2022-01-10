@@ -18,15 +18,25 @@
             </div><br>
         </div><!-- /.blog-post -->
 
-        <nav class="blog-pagination">
+        <div>
           <a class="btn-card" style="padding:10px;margin-bottom:10px;"  href="{% url 'blog:blog_inicio' %}">Volver Atras</a>
           {% if user.is_authenticated %}
             {% if user.id == post.autor.id or user.is_superuser%}
           <a class="btn-card" style="padding:10px;margin-bottom:10px;" href="{% url 'blog:blog_editar' post.pk %}">Editar</a>
           <a class="btn btn-danger"  href="{% url 'blog:blog_eliminar' post.pk %}">Borrar</a>
             {% endif %}
+          <form action= "{% url 'blog:post_like' post.pk %}" method= "POST"> {% csrf_token %}
+            {% if post_is_liked %}
+              <button type= "submit" name="post_id" class="btn-card" style="padding:10px;margin-bottom:10px;float:right;" value = "{{post.id}}">No me gusta</a>
+            {% else %}
+            <button type= "submit" name="post_id" class="btn-card" style="padding:10px;margin-bottom:10px;float:right;" value = "{{post.id}}">Me gusta</a>
+            {% endif %}
+            <br/>{{post.like_count}}
+          </form>
           {% endif %}
-        </nav>
+          
+        </div>
+
 
       </div><!-- /.blog-main -->
 

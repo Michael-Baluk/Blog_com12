@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
-from .models import Usuario 
+from .models import Usuario, Contacto
 
 
 class CrearUsuarioForm(UserCreationForm):
@@ -26,7 +26,16 @@ class EditarUsuarioForm(UserChangeForm):
         for field in self: 
             field.field.widget.attrs['class'] = 'form-control'
              
-            #self.fields['first_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'})    
-            #self.fields['last_name'].widget = forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Password'})
-             
+
+class ContactForm(ModelForm):
+    class Meta:
+        model = Contacto
+        fields = '__all__' 
+        exclude = ('fecha',)
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        for field in self: 
+            field.field.widget.attrs['class'] = 'form-control'
+
     

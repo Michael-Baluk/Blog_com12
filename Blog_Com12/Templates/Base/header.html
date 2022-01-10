@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         {% load static %}
-        <link rel="stylesheet" type="text/css" href='{% static "/css/styles.css" %}'>
+        <link rel="stylesheet"  href='{% static "css/styles.css" %}'>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
                 <ul>
                     <li><a href="{% url 'inicio' %}">Inicio</a></li>
                     <li><a href="{% url 'blog:blog_inicio' %}">Blog</a></li>
-                    <li><a href="{% url 'blog:blog_inicio' %}">Contacto</a></li>
+                    <li><a href="{% url 'usuario:contacto' %}">Contacto</a></li>
                     <li><a href="{% url 'usuario:usuario_perfil' %}" >{{user.get_username}}</a></li>
                     {%if user.is_authenticated and user.is_superuser %}  
                         <li>
@@ -30,6 +30,6 @@
                     {%else%}
                         <a href= "{% url 'usuario:login' %}" class= "btn-card" id="btn-login" > Iniciar sesion</a>
                     {%endif%}
-
                 </ul>
+            </div>
         </header>
