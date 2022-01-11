@@ -1,9 +1,9 @@
-{% extends 'base/base.html' %}
+{% extends 'Base/base.html' %}
 {% block contenido %}
-{% include 'includes/form_errors.html' %}
+{% include 'Includes/form_errors.html' %}
 <form method="post">{% csrf_token %}
     <div class="alert alert-danger" role="alert">
-        ¿Seguro desea eliminar "{{object.titulo}}, escrito por : {{object.autor}}"?
+        ¿Seguro desea eliminar el siguiente comentario: {{object.contenido}}?
     </div>
     {{ form }}
     <button type="submit" class="btn btn-primary">confirmar</button>

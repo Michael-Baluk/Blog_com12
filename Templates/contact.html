@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'Base/base.html' %}
 
 {% block contenido %}
 
@@ -13,7 +13,7 @@
             </ul>
             {% endif %}
 
-            {% include 'includes/form_errors.html' %}
+            {% include 'Includes/form_errors.html' %}
             <form method = "POST"enctype='multipart/form-data'> {% csrf_token %}
                     <div class="input-group mb-3" style="display:inline-block">
                         <div class="form-group"style="margin-left:10px;" >

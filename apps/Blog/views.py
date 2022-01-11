@@ -52,7 +52,7 @@ class BlogInicio(ListView):
 
 class PostDetalle(DetailView):
     model = BlogPost
-    template_name = 'blog/post_detalle.html'
+    template_name = 'Blog/post_detalle.html'
     context_object_name = 'post'
     def get_queryset(self):
         return BlogPost.objects.all()

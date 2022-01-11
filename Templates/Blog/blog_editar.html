@@ -1,11 +1,11 @@
 {% extends 'Base/base.html' %}
 
 {% block contenido %}
-    {% include 'includes/form_errors.html' %}  
+    {% include 'Includes/form_errors.html' %}  
     <div class="container h-100" >
         <div class="d-flex justify-content-center h-100">
             <div class="user_register_card" style="width:70%;">
-                {% include 'includes/form_errors.html' %}
+                {% include 'Includes/form_errors.html' %}
                 <form method = "POST"enctype='multipart/form-data'>> {% csrf_token %}
                     <div class="input-group mb-3">
     
