@@ -157,6 +157,7 @@
         color: #9F9F9F;;
         margin-left: 20%;
         margin-right: 20%;
+        min-height: calc(100% - 200px);
         padding: 120px;
         text-align: center;
     }
@@ -164,7 +165,7 @@
         .footer-general{
         margin-left: 5%;
         margin-right: 5%;
-        padding: 0.5vh;
+        padding: 5.2vh;
         }
     }
 
@@ -465,5 +466,11 @@
     .modal-header {
         background:-webkit-linear-gradient(left,#65CAB6, #FFFFFF);;
     }
+    .indexImage{
+        height: 100%;
+        width:100%;
+        margin:0;
+    }
+
 
 </style>
