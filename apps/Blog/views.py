@@ -114,7 +114,7 @@ class PostEliminar(GroupRequiredMixin,UserPassesTestMixin,DeleteView):
 
 
 class ComentarioNuevo(LoginRequiredMixin,BSModalCreateView):
-        template_name = 'Blog/comentarios/comentario_nuevo.html'
+        template_name = 'Blog/Comentarios/comentario_nuevo.html'
         model = BlogComentario
         form_class = CrearComentarioForm
         raise_exception = True
