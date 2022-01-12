@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='023123FASDFASDF@ASDFASDF@ZZZJ')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 LOGIN_URL = reverse_lazy('usuario:login')
 LOGIN_REDIRECT_URL = 'inicio'
@@ -92,24 +92,24 @@ WSGI_APPLICATION = 'Blog_Com12.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME': "proyecto_final",
-#        'USER': 'postgres',
-#        'PASSWORD': 'a',
-#        'HOST': 'localhost',
-#        'PORT': '5432'
-#    }
-#}
-
-
-
 DATABASES = {
-    'default': dj_database_url.config(
-       default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': "proyecto_final",
+        'USER': 'postgres',
+        'PASSWORD': 'a',
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
 }
+
+
+
+#DATABASES = {
+ #   'default': dj_database_url.config(
+#       default=config('DATABASE_URL')
+#    )
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -157,9 +157,12 @@ STATICFILES_DIRS = (
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/images")
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
-
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "ecomaniana@gmail.com"
+EMAIL_HOST_PASSWORD = "ecomanianablog"
 
 
 # Default primary key field type

@@ -141,10 +141,14 @@ class MostrarComentario(ListView):
     def get_queryset(self):
         return BlogComentario.objects.all()
 
-class ComentarioEliminar(GroupRequiredMixin,LoginRequiredMixin,DeleteView):
+class ComentarioEliminar(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     template_name = 'Blog/Comentarios/comentario_eliminar.html'
     model = BlogComentario
-    group_required = [u"admin"]
+
+    def test_func(self):
+        obj = self.get_object()
+
+        return obj.nombre == self.request.user or self.request.user.is_superuser
     
     def get_success_url(self, **kwargs):
         return reverse('blog:blog_inicio')
