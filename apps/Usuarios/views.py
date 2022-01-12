@@ -54,6 +54,8 @@ def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            contacto = form.save(commit=False)
+            contacto.user = request.user
             form.save()
             messages.success(request, 'El mensaje se envio correctamente')
             return redirect("usuario:contacto")

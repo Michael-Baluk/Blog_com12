@@ -1,7 +1,12 @@
 {% extends 'Base/base.html' %}
+{% load group_auth_extra %}
 {% block contenido %}
 <div class="row" style= "width:62%;margin-left:auto;margin-right:auto;">
+    {% if request.user|has_group:"escritor" or user.is_superuser %} 
     <a href="{% url 'blog:blog_nuevo' %}" class="btn-card" id="Post-nuevo" style="text-align:center;">Nuevo post</a> 
+    {% else %}
+    <a href="{% url 'usuario:contacto' %}" class="btn-card" id="Post-nuevo" style="text-align:center;">Si quiere ser uno de nuestros escritores, contactenos.</a>
+    {% endif %}
 </div>
 <section class="details-card">
     <div class="container">
@@ -36,6 +41,8 @@
 
 </section>
 <div class="row" style= "width:62%;margin-left:auto;margin-right:auto;">
+    {% if request.user|has_group:"escritor" or user.is_superuser %} 
     <a href="{% url 'blog:blog_nuevo' %}" class="btn-card" id="Post-nuevo" style="text-align:center;">Nuevo post</a> 
+    {% endif %}
 </div>
 {% endblock contenido %}

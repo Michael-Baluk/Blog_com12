@@ -9,7 +9,8 @@ class Usuario(AbstractUser):
     class Meta:
         db_table = 'usuarios'
 
-class Contacto(models.Model):
+class Contactar(models.Model):
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     email = models.EmailField(max_length=100)
     subject= models.CharField(max_length=250)
     message = models.TextField()

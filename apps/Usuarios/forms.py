@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
-from .models import Usuario, Contacto
+from .models import Usuario, Contactar
 
 
 class CrearUsuarioForm(UserCreationForm):
@@ -29,9 +29,9 @@ class EditarUsuarioForm(UserChangeForm):
 
 class ContactForm(ModelForm):
     class Meta:
-        model = Contacto
+        model = Contactar
         fields = '__all__' 
-        exclude = ('fecha',)
+        exclude = ('fecha','user')
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)

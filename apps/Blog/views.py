@@ -13,6 +13,8 @@ from django.db.models            import Count
 from bootstrap_modal_forms.generic import BSModalCreateView
 from django.contrib                import messages
 from django.http                 import HttpResponseRedirect
+
+
 # Create your views here.
 class BlogInicio(ListView):
     template_name = "Blog/blog_inicio.html"
@@ -48,6 +50,8 @@ class BlogInicio(ListView):
 
         return query
 
+ 
+
 
 
 class PostDetalle(DetailView):
@@ -69,7 +73,6 @@ class PostDetalle(DetailView):
     
     
 class PostNuevo(GroupRequiredMixin,CreateView):
-        group_required = [u'admin', u'Escritor']
         template_name = 'Blog/blog_nuevo.html'
         model = BlogPost
         form_class = CrearPostForm
@@ -83,6 +86,8 @@ class PostNuevo(GroupRequiredMixin,CreateView):
             f = form.save(commit=False)
             f.autor = self.request.user
             return super(PostNuevo, self).form_valid(form)
+
+
 
 class PostEditar(UserPassesTestMixin,UpdateView):
     template_name = 'blog/blog_editar.html'

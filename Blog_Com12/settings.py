@@ -92,12 +92,22 @@ WSGI_APPLICATION = 'Blog_Com12.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': "proyecto_final",
+#        'USER': 'postgres',
+#        'PASSWORD': 'a',
+#        'HOST': 'localhost',
+#        'PORT': '5432'
+#    }
+#}
 
 
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+       default=config('DATABASE_URL')
     )
 }
 
