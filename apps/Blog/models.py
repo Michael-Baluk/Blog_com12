@@ -34,7 +34,7 @@ class BlogPost(models.Model):
     publicado = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(Usuario,on_delete=models.CASCADE,related_name="autor")
     status = models.CharField(max_length=10,choices=options,default='borrador')
-    imagen = models.ImageField(default= "empty.jpg" ,null=True, blank = True)
+    imagen = models.ImageField(null=True, blank = True)
     likes = models.ManyToManyField(Usuario, related_name="blog_post")
     objects = models.Manager()
     postobjects = BlogPostObjects()

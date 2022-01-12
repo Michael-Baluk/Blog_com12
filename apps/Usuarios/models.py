@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class Usuario(AbstractUser):
     email = models.EmailField(max_length=100)
-    imagen = models.ImageField(default="empty.jpg",null=True, blank=True)
+    imagen = models.ImageField(null=True, blank=True)
     resumen = models.TextField(max_length=250,null=True)
     class Meta:
         db_table = 'usuarios'

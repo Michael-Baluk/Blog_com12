@@ -8,6 +8,7 @@ from .forms                          import EditarUsuarioForm, CrearUsuarioForm,
 from django.contrib.auth.views       import PasswordChangeView
 from django.urls                     import reverse_lazy
 from django.contrib                  import messages
+from django.contrib.auth.decorators import login_required
 
 class UserPage(TemplateView):
     template_name = "Usuarios/usuario_info.html"
@@ -49,7 +50,7 @@ def register(request):
 
 def register_success(request):
     return render(request,'Usuarios/register_success.html',{})
-
+@login_required()
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

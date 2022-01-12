@@ -1,5 +1,6 @@
 {% extends 'Base/base.html' %}
 {% load group_auth_extra %}
+{% load static %}
 {% block contenido %}
 <div class="row" style= "width:62%;margin-left:auto;margin-right:auto;">
     {% if request.user|has_group:"escritor" or user.is_superuser %} 
@@ -22,7 +23,7 @@
                         {% if post.imagen %}
                         <img src="{{post.imagen.url}}"/>
                         {% else %}
-                        <img src="https://archive.org/download/placeholder-image/placeholder-image.jpg" />
+                        <img src="{% static 'images/heroku-empty.jpg' %}"/>
                         {% endif %}
                         <span><h4>{{post.autor}}</h4></span>
                         <span style= "margin-top:43%;"><h4>{{post.categoria}}</h4></span>

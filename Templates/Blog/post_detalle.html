@@ -1,5 +1,5 @@
 {% extends 'Base/base.html' %}
-
+{% load static %}
 {% block contenido %}
 <main role="main" class="container">
     <div class="row">
@@ -44,7 +44,13 @@
         <div class="container mt-4 mb-4 p-3 d-flex justify-content-center" id="perfil">
           <div class="card p-4" id="card-perfil">
               <div class=" image d-flex flex-column justify-content-center align-items-center">
-                 <button class="btn btn-light"> <img src="{{post.autor.imagen.url}}" height="100" width="100" /></button>
+                 <button class="btn btn-light"> 
+                    {% if post.autor.imagen %}
+                      <img src="{{post.autor.imagen.url}}"  heigh="100" width="100" alt=""/>
+                    {% else %}
+                      <img src="{% static 'images/empty.jpg' %}" heigh="100" width="100" alt=""/>
+                    {% endif %}
+                 </button>
                 <span class="name mt-3">{{post.autor}}</span> 
                   <div class="text mt-3" style="width:90%"> <span> {{post.autor.resumen}}</span> </div>
                   <div class=" px-2 rounded mt-4 date "> <span class="join">Miembro desde {{post.autor.date_joined|date:"M d, Y" }}</span> </div>
@@ -110,13 +116,7 @@ $(document).ready(function() {
     });
 
 });
+
 </script>
 {% endblock extrajs %}
 
-<!--<!--$(document).ready(function() {
-
-  $("#comentario-eliminar").modalForm({
-      formURL: "{% url 'blog:comentario_eliminar' comentario.pk %}"
-  });
-
-}); -->
